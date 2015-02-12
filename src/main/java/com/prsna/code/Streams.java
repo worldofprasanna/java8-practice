@@ -73,6 +73,7 @@ public class Streams {
 		
 		// Creating Person objects using the Person Factory. This can also be created using Supplier FI
 		PersonFactory<Person> personFactory = Person::new;
+		// 
 		Person person1 = personFactory.create("A", 10);
 		Person person2 = personFactory.create("B", 15);
 		Person person3 = personFactory.create("C", 5);
@@ -81,7 +82,7 @@ public class Streams {
 		// Creates the Stream of Person objects
 		Stream<Person> personStream = Stream.of(person1, person2, person3, person4, person5);
 		// Creates Comparator object using thier age
-		Comparator<Person> ageComparator = (p1, p2) -> p1.getAge() - p2.getAge();
+		Comparator<Person> ageComparator = (p1, p2) -> p1.getAge().compareTo(p2.getAge());
 		// Stream of persons are sorted and collected as list
 		List<Person> personSortedList = personStream.sorted(ageComparator).collect(Collectors.toList());
 		// Prints the sorted list of persons
@@ -111,7 +112,8 @@ class Person{
 		this.name=name;
 	}
 }
-
+// Functional Interface is optional
+//@FunctionalInterface
 interface PersonFactory<P extends Person>{
 	P create (String name, Integer age);
 }
