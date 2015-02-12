@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -87,6 +88,13 @@ public class Streams {
 		List<Person> personSortedList = personStream.sorted(ageComparator).collect(Collectors.toList());
 		// Prints the sorted list of persons
 		personSortedList.forEach((person) -> System.out.println(person.getName()+" is "+person.getAge()+" years old."));
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+
+		// Reduce the List of Strings by concatinating them using ,
+		Optional<String> authorString = authorsOld.stream()
+		.reduce((a1, a2) -> a1 +", "+a2);
+		
+		authorString.ifPresent(System.out::println);
 		System.out.println("----------------------------------------------------------------------------------------------------------------------------");
 	}
 
